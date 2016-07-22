@@ -1,6 +1,12 @@
 function generateProfile(data) {
     var panel = $('#profile-template').clone().attr('id', '');
     panel.find('.panel-title').text(data.title.rendered);
+    panel.html(panel.html().replace(/{{([A-Za-z_]+)}}/g, function(_, field) {
+        return data.profile_info[field] || '';
+    }));
+    panel.html(panel.html().replace(/{{([A-Za-z_]+)\|(.*?)}}/g, function(_, field, default_) {
+        return data.profile_info[field] || default_;
+    }));
     return panel;
 }
 
@@ -12,6 +18,8 @@ $(function() {
         var url = $('#url').val();
         if (!url)
             return;
+        // Replace protocol, if any, with "//"
+        url = '//' + url.replace(/^(https?:)?\/*/gi, '');
         id++;
         $('<li><a href="#site' + id + '" data-toggle="tab"><button class="close" type="button">&times;</button><span>Loading...</span></a></li>').appendTo($('#tabs'));
         var tabContent = $('<div class="tab-pane" id="site' + id + '"><span class="loading">Loading</span></div>').appendTo($('.tab-content'));
