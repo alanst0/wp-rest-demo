@@ -1,0 +1,25 @@
+body {
+    padding: 1em;
+}
+
+.tab-content {
+    padding-top: 1em;
+}
+
+.nav-tabs > li .close {
+    margin: -1px 0 0 10px;
+    font-size: 18px;
+}
+
+table.profile-info {
+    margin-bottom: 0;
+}
+
+table.profile-info tr:first-child td {
+    border-top: 0;
+}
+
+img {
+    margin-bottom: 5px;
+}
+
